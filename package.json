@@ -1,0 +1,37 @@
+{
+  "name": "ubee",
+  "version": "0.1.0",
+  "description": "Layered AOP forgery tools : up/bottom methods, collider and restrictions",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+
+    "dist": "npm run build  && npm run min && gzip -c -9 dist/ubee.min.js > dist/ubee.min.js.gz",
+    "build": "browserify -s ubee index.js > dist/ubee.js",
+    "min": "uglifyjs dist/ubee.js --compress --mangle  -o dist/ubee.min.js",
+
+    "dist:full": "npm run build:full  && npm run min:full && gzip -c -9 dist/ubee.full.min.js > dist/ubee.full.min.js.gz",
+    "build:full": "browserify -s ubee lib/full.js > dist/ubee.full.js",
+    "min:full": "uglifyjs dist/ubee.full.js --compress --mangle  -o dist/ubee.full.min.js",
+
+    "bump:patch": "npm run dist && npm run dist:full && git add -A && git commit -m 'patch bump' && git push && mversion patch -m && git push --tags && npm publish && git push",
+    "bump:minor": "npm run dist && npm run dist:full && git add -A && git commit -m 'minor bump' && git push && mversion minor -m && git push --tags && npm publish && git push",
+    "bump:major": "npm run dist && npm run dist:full && git add -A && git commit -m 'major bump' && git push && mversion major -m && git push --tags && npm publish && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nomocas/ubee.git"
+  },
+  "keywords": [
+    "AOP",
+    "layer",
+    "mixin",
+    "restrictions"
+  ],
+  "author": "Gilles Coomans <gilles.coomans@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nomocas/ubee/issues"
+  },
+  "homepage": "https://github.com/nomocas/ubee#readme"
+}
